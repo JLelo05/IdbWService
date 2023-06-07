@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-WritingInfluxDB-e6093a18-8f79-4aea-b690-8a3a96e91c00</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="LibConnectPLC\**" />
+    <Content Remove="LibConnectPLC\**" />
+    <EmbeddedResource Remove="LibConnectPLC\**" />
+    <None Remove="LibConnectPLC\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Coravel" Version="4.2.1" />
+    <PackageReference Include="InfluxDB.Client" Version="4.11.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="7.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LibMySqlConnection\LibMySqlConnection.csproj" />
+    <ProjectReference Include="LibConnectPLC\LibConnectPLC.csproj" />
+  </ItemGroup>
+</Project>
