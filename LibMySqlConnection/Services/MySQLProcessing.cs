@@ -23,24 +23,33 @@ namespace LibMySqlConnection.Services
         }
         private List<VisiwinDataModel> GetAllData()
         {
-            string sql = "select id, NameData, ValueData from datatable";
-            return  db.LoadedData<VisiwinDataModel, dynamic>(sql, new { }, _connectionString);
+            List<VisiwinDataModel> output = new List<VisiwinDataModel>();
+            string sql = "select id, CarrierNumber, PositionId from insightpositions.positions";
+
+            try
+            {
+                output = db.LoadedData<VisiwinDataModel, dynamic>(sql, new { }, _connectionString);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            return output;
         }
 
         private void DeleteData(List<VisiwinDataModel> dataToDelete)
         {
-            string sql = $"delete from datatable where id=@id";
+            string sql = $"delete from positions where id=@id";
             db.DeleteData<VisiwinDataModel, List<VisiwinDataModel>>(sql , dataToDelete, _connectionString);
         }
 
 
         public List<VisiwinDataModel> GetInfluxData()
         {
-
             List<VisiwinDataModel> output = new List<VisiwinDataModel>();
-
             List<VisiwinDataModel> _mysql = GetAllData();
-
             if (_mysql.Count != 0)
             {
                 output = _mysql;
@@ -57,12 +66,11 @@ namespace LibMySqlConnection.Services
                     {
                         VisiwinDataModel visiwinDataModel = new VisiwinDataModel();
                         visiwinDataModel.id = i;
-                        visiwinDataModel.NameData = $"Value{i}";
-                        visiwinDataModel.ValueData = (i + 1) *rnd.Next() ;
+                        visiwinDataModel.CarrierNumber =  100+i;
+                        visiwinDataModel.PositionId = (i + 1) *rnd.Next() ;
                         dataToSend.Add(visiwinDataModel);
                     }
-
-                    string sql = $"insert into datatable(NameData, ValueData) value (@NameData, @ValueData)";
+                    string sql = $"insert into positions(CarrierNumber, PositionId) value (@NameData, @ValueData)";
                     db.SaveData(sql,dataToSend,_connectionString);
                 }
                 return output;

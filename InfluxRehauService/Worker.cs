@@ -37,6 +37,7 @@ namespace WritingInfluxDB
         }
         public override Task StartAsync(CancellationToken cancellationToken)
         {
+            _logger.LogInformation("The service has started.");
             return base.StartAsync(cancellationToken);
         }
         public override Task StopAsync(CancellationToken cancellationToken)

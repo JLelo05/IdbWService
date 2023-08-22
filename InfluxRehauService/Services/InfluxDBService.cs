@@ -11,8 +11,8 @@ namespace app.Services
         private readonly string _url;
         public InfluxDBService(IConfiguration configuration)
         {
-            _token = configuration.GetValue<string>("InfluxDB_testing:Token");
-            _url = configuration.GetValue<string>("InfluxDB_testing:URL");
+            _token = configuration.GetValue<string>("InfluxDB:Token");
+            _url = configuration.GetValue<string>("InfluxDB:URL");
         }
         public void Write(Action<WriteApi> action)
         {

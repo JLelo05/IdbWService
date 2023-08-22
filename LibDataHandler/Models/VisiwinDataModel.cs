@@ -9,7 +9,7 @@ namespace LibMySqlConnection.Models
     public class VisiwinDataModel
     {
         public int id { get; set; }
-        public string NameData { get; set; }
-        public int ValueData { get; set; }
+        public int CarrierNumber { get; set; }
+        public int PositionId { get; set; }
     }
 }
