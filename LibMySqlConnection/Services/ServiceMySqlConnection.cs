@@ -12,11 +12,14 @@ namespace LibMySqlConnection.Services
     public class ServiceMySqlConnection
     {
         public MySqlProcessing sql;
-
+        //private readonly ILogger<Worker> _logger;
         public ServiceMySqlConnection(IConfiguration clientConfig)
         {
             sql = new MySqlProcessing(clientConfig.GetConnectionString("Production"));
+ 
         }
+
+      
 
         //private string GetConnectionString( string connectionString = "Default")
         //{

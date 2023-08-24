@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,15 +17,13 @@ namespace LibMySqlConnection.Services
             using (IDbConnection connection = new MySqlConnection(connectionString))
             {
                 List<T> rows = new List<T>();
-
                 try
                 {
                     rows  = connection.Query<T>(sqlStatment, parameters).ToList();
-                } catch (Exception ex) { 
-                
-              LogDefineOptions.
+                } catch (Exception ex) {
+
+                    Log.Warning("MySQL Load data Error:" + ex.Message);
                 }
-              
                 return rows;
             }
         }

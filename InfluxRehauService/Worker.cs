@@ -24,7 +24,6 @@ namespace WritingInfluxDB
             ClientConfig = configuration;
             clientMySql = new ServiceMySqlConnection(ClientConfig);
             clientInfluxDB = new InfluxWriteData(new InfluxDBService(ClientConfig),clientMySql);
-            
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -37,12 +36,12 @@ namespace WritingInfluxDB
         }
         public override Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("The service has started.");
+            _logger.LogInformation("The service loop has started.");
             return base.StartAsync(cancellationToken);
         }
         public override Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("The service has stopped.");
+            _logger.LogInformation("The service loop has stopped.");
             return base.StopAsync(cancellationToken);
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
