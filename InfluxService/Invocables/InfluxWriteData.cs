@@ -15,6 +15,8 @@ namespace app.Invocables
 {
     public class InfluxWriteData : IInvocable
     {
+        private readonly string _token;
+        private readonly string _url;
         private readonly InfluxDBService _service;
         private readonly ServiceMySqlConnection _clientMySql;  
         List<PointData> points;
@@ -23,6 +25,7 @@ namespace app.Invocables
         {
             _service = service;
             _clientMySql = clientMySql;
+
         }
         public Task Invoke()
         {
@@ -43,13 +46,12 @@ namespace app.Invocables
                 {
                     foreach (var item in data)
                     {
-                            var point = PointData.Measurement(item.NameData)
-                          .Field("value", item.ValueData)
+                            var point = PointData.Measurement(item.CarrierNumber.ToString())
+                          .Field("value", item.PositionId)
                           .Timestamp(DateTime.UtcNow, WritePrecision.Ns);
                             points.Add(point);
                     }
-                    write.WritePoints(points, "i4TestingDB", "i4industry");
-                    //write.WritePoints(points, "RehauAurum", "i4industry");
+                    write.WritePoints(points, "RehauAurum", "i4industry");
                 });
             }
             return Task.CompletedTask;

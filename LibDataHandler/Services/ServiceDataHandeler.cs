@@ -85,9 +85,6 @@ namespace LibDataHandler.Services
         public List<VisiwinDataModel> CompareData(List<VisiwinDataModel> realTimeData)
         {
             List<VisiwinDataModel> output=null;
-
-
-
             return output;
 
         }
