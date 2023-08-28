@@ -21,7 +21,7 @@ internal class Program
 
         var log = config.GetConnectionString("Logs");
         Log.Logger = new LoggerConfiguration().WriteTo
-           .MSSqlServer("Server=SQLEXPRESS;Database=systemlogs;User Id=test;Password=111111;", new MSSqlServerSinkOptions() { TableName = "LogEvents"})
+           .MSSqlServer(@"Server=.\SQLExpress;Database=systemlogs;User Id=test;Password=111111;TrustServerCertificate=True;", new MSSqlServerSinkOptions() { TableName = "LogEvents", AutoCreateSqlTable = true })
            .CreateLogger();
         try
         {
